@@ -3,7 +3,27 @@ import { checkPassword, encrypt } from '../../utils/encrypt.js';
 import { generateJwt } from '../../utils/jwt.js';
 
 /**Register */
-export const register = async (req, res) => {
+export const registerClient = async (req, res) => {
+    try {
+        let data = req.body;
+        let user = new User(data);
+        user.password = await encrypt(user.password);
+        user.role = 'CLIENT'
+        await user.save();
+        return res.send({
+            success: true,
+            message: `${user.username} created successfully`,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({
+            success: false,
+            message: 'Error al registrar client',error
+        });
+    }
+}
+
+export const registerAdmin = async (req, res) => {
     try {
         let data = req.body;
         let user = new User(data);
@@ -11,8 +31,8 @@ export const register = async (req, res) => {
         await user.save();
         return res.send({
             success: true,
-            message: 'User created successfully',
-        })
+            message: `${user.username} created successfully`,
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).send({
@@ -28,8 +48,8 @@ export const login = async (req, res) => {
         let {userLoggin, password} = req.body;
         let user = await User.findOne({
             $or:[
-                {username: username},
-                {email: email}
+                {username: userLoggin},
+                {email: userLoggin}
             ]    
         });
 
@@ -87,5 +107,27 @@ export const updateRole = async (req, res) => {
             success: false,
             message:'Generar error with update role',error
         })
+    }
+}
+
+/*Create admin default */
+export const createAdminDefault = async() => {
+    try {
+        let adminExist = await User.findOne({name: 'Admin'});
+
+        if(!adminExist){
+            let admin = new User({
+                name: 'Admin',
+                lastname: 'Primero',
+                email: 'admin@admin.com',
+                username: 'admin',
+                password: 'Admin123',
+                role: 'ADMIN',
+            })
+            await admin.save();
+
+        }
+    } catch (error) {
+        console.error(error);
     }
 }

@@ -4,17 +4,20 @@ const userSchema = Schema({
     name: {
         type: String,
         required: [true, 'Name is required'],
-        maxLength: [50, 'Name is too long']
+        maxLength: [50, 'Name is too long'],
+        unique: [true, 'Name is already taken']
     },
     lastname:{
         type: String,
         required: [true, 'Last name is required'],
-        maxLength: [50, 'Last name is too long']
+        maxLength: [50, 'Last name is too long'],
+        unique: [true, 'Last name is already taken']
     },
     username:{
         type: String,
         required: [true, 'Username is required'],
-        unique: [true, 'Username is already in use']
+        unique: [true, 'Username is already in use'],
+        unique: [true, 'Username is already in use'],
     },
     email:{
         type: String,
@@ -25,7 +28,7 @@ const userSchema = Schema({
         type: String,
         required: [true,'Password is required'],
         minLength: [8, 'Password must be at least 8 characters long'],
-        maxLength: [100, 'Password can not be longer than 100 characters'],
+        maxLength: [15, 'Password can not be longer than 15 characters'],
     },
     role:{
         type: String,

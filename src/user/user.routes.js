@@ -1,8 +1,11 @@
 import {Router} from 'express';
-import { register } from './user.controller.js';
+import { registerClient, registerAdmin, login } from './user.controller.js';
+import { isAdmin, validateJwt } from '../../middlewares/validate.jwt.js';
 
 const api = Router()
 
-api.post('/addUser', register)
+api.post('/addUserClient', registerClient);
+api.post('/addUserAdmin', validateJwt, isAdmin ,registerAdmin)
+api.post('/login', login);
 
 export default api;

@@ -1,5 +1,5 @@
 import {body} from 'express-validator';
-import { validateErrors, validateErrorsFiles } from './validate.errors';
+import { validateErrors, validateErrorsFiles } from './validate.errors.js';
 import {existProductName,existProductBrand} from '../utils/db.validator.js'
 import {existCategoryName} from '../utils/db.validator.js'
 import {existUsername, existEmail} from '../utils/db.validator.js'
@@ -9,7 +9,7 @@ import {existUsername, existEmail} from '../utils/db.validator.js'
 export const registerValidatorProducto = [
     body('name', 'Name cannot be empty').notEmpty().custom(existProductName),
     body('description', 'Description cannot be empty').notEmpty(),
-    body('brand', 'Brand cannot be empty').notEmpty(),isLength({max:10}).withMessage('The mark is too long'),
+    body('brand', 'Brand cannot be empty').notEmpty().isLength({max:10}).withMessage('The mark is too long'),
     body('price', 'Price cannot be empty').notEmpty().isDecimal().custom(existProductBrand),
     body('stock', 'Stock cannot be empty').notEmpty().isInt(),
     validateErrors
@@ -18,7 +18,7 @@ export const registerValidatorProducto = [
 /*Category validation */
 export const registerValidatorCategory = [
     body('name', 'Name cannot be empty').notEmpty().custom(existCategoryName),
-    body('description', 'Description cannot be empty').notEmpty().isLength({max:15}).withMessage('The description is too long'),
+    body('description', 'Description cannot be empty').notEmpty().isLength({max:1000}).withMessage('The description is too long'),
     body('creation', 'Creation cannot be empty').notEmpty().isDate(),
     validateErrors
 ]

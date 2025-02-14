@@ -28,6 +28,11 @@ const productSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'Employee is required'],
+    },
+    category:{
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        required: [true, 'Category is required'],
     }
 })
 
