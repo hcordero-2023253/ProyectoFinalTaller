@@ -4,7 +4,9 @@ import express from "express"
 import morgan from "morgan"
 import cors from "cors"
 import helmet from "helmet"
-import { limiter } from "../middlewares/rete.limit"
+import { limiter } from "../middlewares/rate.limit.js"
+import userRoutes from "../src/user/user.routes.js"
+
 
 const configs = (app)=>{
     app.use(express.json());
@@ -16,7 +18,7 @@ const configs = (app)=>{
 }
 
 const routes = (app) => {
-    
+    app.use('/v1/user', userRoutes);
 }
 
 

@@ -23,6 +23,11 @@ const productSchema = Schema({
     stock:{
         type:Number,
         required:[true,'Is required'],
+    },
+    employee:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'Employee is required'],
     }
 })
 
