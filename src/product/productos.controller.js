@@ -88,6 +88,16 @@ export const deleteProduct = async (req, res) => {
     try {
         let id = req.params.id;
         let product = await Product.findByIdAndDelete(id);
+
+        if(!product){
+            return res.status(404).send({
+                success: false,
+                message: 'The product has already been removed'
+            });
+        }
+
+        await Product.findByIdAndDelete(id);
+
         return res.status(200).send({
             success: true,
             message: `${product.name} deleted successfully`, product

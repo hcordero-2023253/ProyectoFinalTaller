@@ -94,6 +94,11 @@ export const deleteCategory = async (req, res) => {
             message: 'Category not found',
         });
 
+        if(category.name === 'Default') return res.status(400).send({
+            success: false,
+            message: 'Cannot delete default category',
+        });
+
         let defaultCategory = await Category.findOne({name: 'Default'})
 
         await Product.updateMany({category: id}, {category: defaultCategory._id})
