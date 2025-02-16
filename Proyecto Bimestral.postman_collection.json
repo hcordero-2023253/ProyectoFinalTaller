@@ -161,7 +161,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3605/v1/category/deleteCategory/67b23980feae37ac81960cd1",
+							"raw": "localhost:3605/v1/category/deleteCategory/67b234d183ec383b2a36932a",
 							"host": [
 								"localhost"
 							],
@@ -170,7 +170,7 @@
 								"v1",
 								"category",
 								"deleteCategory",
-								"67b23980feae37ac81960cd1"
+								"67b234d183ec383b2a36932a"
 							]
 						}
 					},
@@ -296,12 +296,12 @@
 								},
 								{
 									"key": "employee",
-									"value": "67b23889d596d806d1191ac8",
+									"value": "67b23879d596d806d1191ac8",
 									"type": "text"
 								},
 								{
 									"key": "category",
-									"value": "67b23980feae37ac81960cd1",
+									"value": "67b238c3d596d806d1191acb",
 									"type": "text"
 								}
 							]
@@ -385,7 +385,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3605/v1/product/deleteProduct/67af983cbda28a1ddb409599",
+							"raw": "localhost:3605/v1/product/deleteProduct/67b23997feae37ac81960cd3",
 							"host": [
 								"localhost"
 							],
@@ -394,7 +394,7 @@
 								"v1",
 								"product",
 								"deleteProduct",
-								"67af983cbda28a1ddb409599"
+								"67b23997feae37ac81960cd3"
 							]
 						}
 					},
