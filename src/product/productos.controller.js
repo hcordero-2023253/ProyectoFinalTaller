@@ -1,11 +1,42 @@
 import Product from './productos.model.js'
 import Category from '../category/categorias.model.js'
+import User from '../user/user.model.js'
 
 export const addProduct = async (req, res) => {
     try{
         let data = req.body;
         let product = new Product(data);
+        let existinProduct = await Product.findById(data.id)
+        
+        if(!data.name || !data.price || !data.category || !data.employee) return res.status(400).send({
+            success: false,
+            message: 'Product is required',
+        });
+
+        let category = await Category.findById(data.category);
+        if(!category){
+            return res.status(400).send({
+                success: false,
+                message: 'Category not found',
+                });
+        }
+        
+        let user = await User.findById(data.employee);
+        if(!user){
+            return res.status(400).send({
+                success: false,
+                message: 'Employee not found',
+            });
+        }
+
+        if(existinProduct ) return res.status(400).send({
+            success: false,
+            message: 'Product already exists',
+        })
+
         await product.save();
+
+
         return res.status(201).send({
             success: true,
             message: `${product.name} created successfully`, product
