@@ -22,7 +22,7 @@ export const addProduct = async (req, res) => {
 export const viewProduct = async (req, res) => {
     const { limit, skip } = req.query;
     try {
-        const products = await Product.find().skip(skip).limit(limit);
+        const products = await Product.find().skip(skip).limit(limit).populate({path: 'category employee', select: 'name'});
 
         if(products.length === 0) return res.status(404).send({
             success: false,

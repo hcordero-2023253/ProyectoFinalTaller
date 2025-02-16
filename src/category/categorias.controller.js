@@ -1,4 +1,6 @@
+import product from '../product/productos.routes.js'
 import Category from './categorias.model.js'
+import Product from '../product/productos.model.js'
 
 export const addCategory = async (req, res) => {
     try {
@@ -85,12 +87,24 @@ export const updateCategory = async (req, res) => {
 export const deleteCategory = async (req, res) => {
     try {
         let id = req.params.id
-        let category = await Category.findByIdAndDelete(id)
-        if(category._id ===  category)
+        let category = await Category.findById(id);
+        
+        if(!category)return res.status(404).send({
+            success: false,
+            message: 'Category not found',
+        });
+
+        let defaultCategory = await Category.findOne({name: 'Default'})
+
+        await Product.updateMany({category: id}, {category: defaultCategory._id})
+        await Category.findByIdAndDelete(id)
+
         return res.send({
             success: true,
-            message: `${category.name} deleted successfully`, category
-        })
+            message: `${category.name} deleted successfully and products reassigned to Default category`,
+            category
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).send({
@@ -103,7 +117,7 @@ export const deleteCategory = async (req, res) => {
 /*Agregar una categoria por defecto */
 export const addDefaultCategory = async() => {
     try {
-        const categoryExist = await Category.findOne({name: 'Default Category'})
+        const categoryExist = await Category.findOne({name: 'Default'})
 
         if (!categoryExist) {
             let category = new Category({

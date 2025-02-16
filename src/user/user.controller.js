@@ -119,13 +119,13 @@ export const createAdminDefault = async() => {
             let admin = new User({
                 name: 'Admin',
                 lastname: 'Primero',
-                email: 'admin@admin.com',
+                email: 'admin@gmail.com',
                 username: 'admin',
                 password: 'Admin123',
-                role: 'ADMIN',
+                role: 'ADMIN'
             })
+            admin.password = await encrypt(admin.password);
             await admin.save();
-
         }
     } catch (error) {
         console.error(error);

@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "60f0f47d-2ab3-42f6-b347-28c855d5ad88",
+		"name": "Proyecto Bimestral",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37956978"
+	},
+	"item": [
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "Paginacion Categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/category/?limit=2&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver una categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/category/67afc37a4a1223d9b0a7ce42",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"67afc37a4a1223d9b0a7ce42"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Juegos",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Escencial para tenener una gran \"Diversion\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/addCategory",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"addCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Categoria",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "Categoria para utilizar en el el estudio o en el día a día",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/updateCategory/67afc1170dfb74a2254ab788",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"updateCategory",
+								"67afc1170dfb74a2254ab788"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/category/deleteCategory/67b23980feae37ac81960cd1",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"deleteCategory",
+								"67b23980feae37ac81960cd1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Paginacion Productos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/product/?limit=3&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver un producto",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/product/67afa1600d0e9a0972232b47",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"product",
+								"67afa1600d0e9a0972232b47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Platicina",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Es perfecto para jugar",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "playdo",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1.50",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "employee",
+									"value": "67b23889d596d806d1191ac8",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67b23980feae37ac81960cd1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/product/addProdcut",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"product",
+								"addProdcut"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Procesador Core i13-11",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Es un modelo unico",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "Intel",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/product/updateProduct/67af983cbda28a1ddb409599",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"product",
+								"updateProduct",
+								"67af983cbda28a1ddb409599"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Producto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/product/deleteProduct/67af983cbda28a1ddb409599",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"product",
+								"deleteProduct",
+								"67af983cbda28a1ddb409599"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Agregar Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Carmen Marisol",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Oliva",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "coliva",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "coliva@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "LaMejorMadre",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/user/addUserClient",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"user",
+								"addUserClient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Lucas",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "lperez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "lperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Elpaj4ro",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "ADMIN",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/user/addUserAdmin",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"user",
+								"addUserAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userLoggin",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Admin123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
