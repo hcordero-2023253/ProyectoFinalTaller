@@ -3,49 +3,49 @@ import Category from '../category/categorias.model.js'
 import User from '../user/user.model.js'
 
 export const addProduct = async (req, res) => {
-    try{
+    try {
         let data = req.body;
-        let product = new Product(data);
-        let existinProduct = await Product.findById(data.id)
         
-        if(!data.name || !data.price || !data.category || !data.employee) return res.status(400).send({
-            success: false,
-            message: 'Product is required',
-        });
-
-        let category = await Category.findById(data.category);
-        if(!category){
-            return res.status(400).send({
-                success: false,
-                message: 'Category not found',
-                });
-        }
-        
-        let user = await User.findById(data.employee);
-        if(!user){
-            return res.status(400).send({
-                success: false,
-                message: 'Employee not found',
+        let existingProduct = await Product.findOne({ name: data.name }).populate('category').populate('employee');
+        if (existingProduct) {
+            existingProduct.stock += 1;
+            await existingProduct.save();
+            return res.status(200).send({
+                success: true,
+                message: `Stock increased for ${existingProduct.name}`,
+                product: existingProduct
             });
         }
 
-        if(existinProduct ) return res.status(400).send({
-            success: false,
-            message: 'Product already exists',
-        })
+        let category = await Category.findById(data.category);
+        if (!category) {
+            return res.status(404).send({ 
+                success: false, 
+                message: 'Category not found' 
+            });
+        }
 
+        let user = await User.findById(data.employee);
+        if (!user) {
+            return res.status(404).send({ 
+                success: false, 
+                message: 'Employee not found' 
+            });
+        }
+
+        let product = new Product({...data, stock: 1});
         await product.save();
-
 
         return res.status(201).send({
             success: true,
-            message: `${product.name} created successfully`, product
+            message: `${product.name} created successfully`,
+            product
         });
     } catch (error) {
         console.error(error);
         res.status(500).send({
-            success: false,
-            message: 'Cannot add product' , error
+            success: false, 
+            message: 'Cannot add product', error
         });
     }
 }

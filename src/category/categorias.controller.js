@@ -123,6 +123,10 @@ export const deleteCategory = async (req, res) => {
 export const addDefaultCategory = async() => {
     try {
         const categoryExist = await Category.findOne({name: 'Default'})
+        if(categoryExist){
+            return console.log("Category already exist");
+            
+        }
 
         if (!categoryExist) {
             let category = new Category({
@@ -131,6 +135,8 @@ export const addDefaultCategory = async() => {
             });
             await category.save()
         }
+        console.log("Category created");
+        
     } catch (error) {
         console.error(error);
     }

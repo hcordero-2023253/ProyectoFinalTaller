@@ -17,7 +17,6 @@ const userSchema = Schema({
         type: String,
         required: [true, 'Username is required'],
         unique: [true, 'Username is already in use'],
-        unique: [true, 'Username is already in use'],
     },
     email:{
         type: String,
