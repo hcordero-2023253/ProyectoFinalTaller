@@ -165,8 +165,8 @@ export const createAdminDefault = async () => {
             })
             admin.password = await encrypt(admin.password);
             await admin.save();
+            console.log("Admin created")
         }
-        console.log("Admin created")
     } catch (error) {
         console.error(error);
     }

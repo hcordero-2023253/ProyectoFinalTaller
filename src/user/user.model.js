@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { encrypt, checkPassword } from "../../utils/encrypt.js";
 
 const userSchema = Schema({
     name: {
@@ -20,7 +21,7 @@ const userSchema = Schema({
     },
     email:{
         type: String,
-        required: [true, 'emal is required'],
+        required: [true, 'Email is required'],
         unique: [true, 'Email is already in use']
     },
     password:{
@@ -37,9 +38,28 @@ const userSchema = Schema({
     
 })
 
+userSchema.pre('save', async function (next) {
+    if(!this.isModified('password')) return next()
+        try {
+            this.password = await encrypt(this.password)
+        } catch (error) {
+            console.error('Error hashing password:', error);
+            return next(error);
+        }
+})
+
 userSchema.methods.toJSON = function(){
     const {__v, password, ...user} = this.toObject();
     return user;
+}
+
+userSchema.methods.comparePassword = async function(candidatePassword)  {
+    try {
+        return await checkPassword(this.password, candidatePassword );
+    } catch (error) {
+        console.error('Error comparing password:', error);
+        return false
+    }
 }
 
 export default model('User', userSchema);

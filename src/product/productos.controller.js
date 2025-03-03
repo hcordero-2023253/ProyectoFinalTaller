@@ -6,7 +6,15 @@ export const addProduct = async (req, res) => {
     try {
         let data = req.body;
         
-        let existingProduct = await Product.findOne({ name: data.name }).populate('category').populate('employee');
+
+        if (!data.name || !data.price || !data.category ) {
+            return res.status(400).send({
+                success: false,
+                message: 'Name, price, category are required'
+            });
+        }
+
+        let existingProduct = await Product.findOne({ name: data.name }).populate('category');
         if (existingProduct) {
             existingProduct.stock += 1;
             await existingProduct.save();
@@ -25,14 +33,6 @@ export const addProduct = async (req, res) => {
             });
         }
 
-        let user = await User.findById(data.employee);
-        if (!user) {
-            return res.status(404).send({ 
-                success: false, 
-                message: 'Employee not found' 
-            });
-        }
-
         let product = new Product({...data, stock: 1});
         await product.save();
 
@@ -45,15 +45,53 @@ export const addProduct = async (req, res) => {
         console.error(error);
         res.status(500).send({
             success: false, 
-            message: 'Cannot add product', error
+            message: 'Cannot add product',
+            error: error.message
         });
     }
 }
 
 export const viewProduct = async (req, res) => {
-    const { limit, skip } = req.query;
+    const { limit, skip, stockLevel, category, name, minPrice, maxPrice, saleSort } = req.query;
     try {
-        const products = await Product.find().skip(skip).limit(limit).populate({path: 'category employee', select: 'name'});
+
+        let query = {}
+
+        /*Filtrado por stock si es menor a 5 es que esta bajo y si 
+        es 0 es que esta agotado */
+        if(stockLevel){
+            const lowStock = 5;
+            const outStock = 0;
+            if(stockLevel.toLoweCase() === 'low'){
+                query.stock = { $lte: lowStock };
+            }else if(stockLevel.toLoweCase() === 'out'){
+                query.stock = { $lte: outStock };
+            }
+        }
+
+        if( category ){
+            query.category = category;
+        }
+
+        if(name){      //Busqueda principal  |   insensible a mayusculas/minusculas
+            query.name = { $regex: name, $options: 'i' };
+        }
+
+        /*Filtrado por medio del rango de precio mayor o menor */
+        if(minPrice && maxPrice){
+            query.price = {};
+            if(minPrice) query.price.$gte = parseFloat(minPrice);
+            if(maxPrice) query.price.$lte = parseFloat(maxPrice);
+        }
+
+        let sort = {}
+        if(saleSort && saleSort.toLoweCase() === 'desc'){
+            sort.sales = -1;
+        }else if (saleSort && saleSort.toLoweCase() === 'asc'){
+            sort.sales = 1;
+        }
+
+        const products = await Product.find().skip(skip).limit(limit).populate({path: 'category', select: 'name'}).sort(sort);
 
         if(products.length === 0) return res.status(404).send({
             success: false,
@@ -70,7 +108,8 @@ export const viewProduct = async (req, res) => {
         console.error(error);
         res.status(500).send({
             success: false,
-            message: 'Cannot add product ',error
+            message: 'Cannot add product ',
+            error: error.message
         });
     }
 }
@@ -101,6 +140,14 @@ export const updateProduct = async (req, res) => {
     try {
         let id = req.params.id;
         let data = req.body;
+
+        if(data.stock !== undefined && data.stock < 0) {
+            return res.status(400).send({
+                success: false,
+                message: 'Stock cannot be negative'
+            });
+        }
+
         let product = await Product.findByIdAndUpdate(id, data, { new: true });
         return res.status(200).send({
             success: true,

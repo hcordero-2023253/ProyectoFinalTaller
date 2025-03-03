@@ -24,11 +24,6 @@ const productSchema = Schema({
         type:Number,
         required:[true,'Is required'],
     },
-    employee:{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'Employee is required'],
-    },
     category:{
         type: Schema.Types.ObjectId,
         ref: 'Category',
