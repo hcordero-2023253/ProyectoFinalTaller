@@ -7,7 +7,6 @@ export const registerClient = async (req, res) => {
     try {
         let data = req.body;
         let user = new User(data);
-        user.password = await encrypt(user.password);
         user.role = 'CLIENT'
         await user.save();
         return res.send({
@@ -27,7 +26,6 @@ export const registerAdmin = async (req, res) => {
     try {
         let data = req.body;
         let user = new User(data);
-        user.password = await encrypt(user.password);
         await user.save();
         return res.send({
             success: true,
@@ -56,15 +54,17 @@ export const login = async (req, res) => {
         if (!user) {
             return res.status(404).send({
                 success: false,
-                message: 'Invalida user o password'
+                message: 'Invalid user or password'
             });
         }
 
-        const isPasswordValid = await checkPassword(user.password, password);
+        const isPasswordValid = await user.comparePassword( password);
+        console.log(isPasswordValid);
+        
         if (!isPasswordValid) {
             return res.status(401).send({
                 success: false,
-                message: 'Invalida user o password'
+                message: 'Invalid user or password'
             });
         }
 
@@ -163,7 +163,6 @@ export const createAdminDefault = async () => {
                 password: process.env.PASSWORD,
                 role: process.env.ROLE
             })
-            admin.password = await encrypt(admin.password);
             await admin.save();
             console.log("Admin created")
         }

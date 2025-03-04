@@ -87,12 +87,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Juegos",
+									"value": "Boxeo",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Escencial para tenener una gran \"Diversion\"",
+									"value": "Todo en seguridad",
 									"type": "text"
 								}
 							]
@@ -211,6 +211,41 @@
 								{
 									"key": "skip",
 									"value": "0"
+								},
+								{
+									"key": "lowStock",
+									"value": "low",
+									"disabled": true
+								},
+								{
+									"key": "outStock",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Juegos",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": null,
+									"disabled": true
 								}
 							]
 						}
@@ -271,37 +306,27 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Platicina",
+									"value": "Guantes",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Es perfecto para jugar",
+									"value": "Guantes 100% certificados",
 									"type": "text"
 								},
 								{
 									"key": "brand",
-									"value": "playdo",
+									"value": "WWE",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "1.50",
-									"type": "text"
-								},
-								{
-									"key": "stock",
 									"value": "50",
 									"type": "text"
 								},
 								{
-									"key": "employee",
-									"value": "67b23879d596d806d1191ac8",
-									"type": "text"
-								},
-								{
 									"key": "category",
-									"value": "67b238c3d596d806d1191acb",
+									"value": "67c66e82a0029fd0b9546537",
 									"type": "text"
 								}
 							]
@@ -415,27 +440,27 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Carmen Marisol",
+									"value": "Marcos",
 									"type": "text"
 								},
 								{
 									"key": "lastname",
-									"value": "Oliva",
+									"value": "Antonio",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "coliva",
+									"value": "mantonio",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "coliva@gmail.com",
+									"value": "mantonio@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "LaMejorMadre",
+									"value": "ElZompopo",
 									"type": "text"
 								}
 							]
@@ -517,6 +542,110 @@
 					"response": []
 				},
 				{
+					"name": "Actualizar Rol",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "HOLA",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "lperez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "lperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Elpaj4ro",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "CLIENT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/user/updateRole/",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"user",
+								"updateRole",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "C4rM3n0lv4",
+									"type": "text"
+								},
+								{
+									"key": "confirmation",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/users/delete/67c60b733729b85e8c37e96b",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"users",
+								"delete",
+								"67c60b733729b85e8c37e96b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"event": [
 						{
@@ -559,6 +688,260 @@
 								"v1",
 								"user",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Ver el carrito",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/cart/viewCart",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"cart",
+								"viewCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carrito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "User",
+									"value": "67c66ff4a0029fd0b954656c",
+									"type": "text"
+								},
+								{
+									"key": "productId",
+									"value": "67c66ed3a0029fd0b954653f",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/cart/addCart",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"cart",
+								"addCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carrito Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"67c66ed3a0029fd0b954653f\",\r\n            \"quantity\": 1,\r\n            \"productId\": \"67c66f03a0029fd0b9546558\",\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3605/v1/cart/updateCart/67c6703fa0029fd0b9546570",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"cart",
+								"updateCart",
+								"67c6703fa0029fd0b9546570"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Carrito",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"67c66ed3a0029fd0b954653f\",\r\n            \"quantity\": 1,\r\n            \"productId\": \"67c66f03a0029fd0b9546558\",\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3605/v1/cart/deleteCart/67c6703fa0029fd0b9546570",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"cart",
+								"deleteCart",
+								"67c6703fa0029fd0b9546570"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bill",
+			"item": [
+				{
+					"name": "Factura",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/bill/complete",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"bill",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Factura Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/bill/bill?userId=67c66e401cfdec19e40f18f1",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"bill",
+								"bill"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "67c66e401cfdec19e40f18f1"
+								}
 							]
 						}
 					},
